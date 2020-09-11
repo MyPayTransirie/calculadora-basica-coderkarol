@@ -6,5 +6,5 @@
     <color name="actionButton">#F57C00</color>
     <color name="operatorButton">#1B6E1F</color>
     <color name="numberButton">#455A64</color>
-    <color name="backButton">#9C0C01</color>
+    <color name="backButton">#F44336</color>
 </resources>
