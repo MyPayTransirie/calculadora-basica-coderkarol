@@ -1,17 +1,38 @@
 package com.example.calculator
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
-import net.objecthunter.exp4j.Expression
+import kotlinx.android.synthetic.main.activity_tela_historico.*
 import net.objecthunter.exp4j.ExpressionBuilder
+
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+
+        fun appendOnExpression (string: String, canClear: Boolean) {
+
+            if (tvResult.text.isNotEmpty()) {
+                tvExpression.text = ""
+            }
+
+            if (canClear) {
+                tvResult.text = ""
+                tvExpression.append(string)
+            } else {
+                tvExpression.append(tvResult.text)
+                tvExpression.append(string)
+                tvResult.text = ""
+
+            }
+        }
 
         // Numeros
         tvOne.setOnClickListener{appendOnExpression("1", true)}
@@ -31,8 +52,7 @@ class MainActivity : AppCompatActivity() {
         tvMinus.setOnClickListener{appendOnExpression("-", true)}
         tvMul.setOnClickListener{appendOnExpression("*", true)}
         tvDivide.setOnClickListener{appendOnExpression("/", true)}
-        tvOpen.setOnClickListener{appendOnExpression("(", true)}
-        tvClose.setOnClickListener{appendOnExpression(")", true)}
+
 
         // limpa a parte onde fica a minha expressão
         // e limpa a parte onde fica o resultado
@@ -56,6 +76,7 @@ class MainActivity : AppCompatActivity() {
                 val expression = ExpressionBuilder(tvExpression.text.toString()).build()
                 val result = expression.evaluate()
                 val longResult = result.toLong()
+                var valor: String
                 if(result == longResult.toDouble())
                     tvResult.text = longResult.toString()
                 else
@@ -69,22 +90,13 @@ class MainActivity : AppCompatActivity() {
             if(tvResult.text.isEmpty()) {
                 Toast.makeText(applicationContext, "Operação Invalida", Toast.LENGTH_LONG).show()
             }
-        }
-    }
-    fun appendOnExpression (string: String, canClear: Boolean){
-
-        if (tvResult.text.isNotEmpty()){
-            tvExpression.text=""
-        }
-
-        if(canClear){
-            tvResult.text=""
-            tvExpression.append(string)
-        }else{
-            tvExpression.append(tvResult.text)
-            tvExpression.append(string)
-            tvResult.text=""
 
         }
+
+        // Direciona o usuário para uma tela de Histórico e mostra o historico dos calculos
+        tvHistorico.setOnClickListener {
+
+        }
+
     }
 }

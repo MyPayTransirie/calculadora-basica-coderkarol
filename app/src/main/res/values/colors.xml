@@ -7,4 +7,5 @@
     <color name="operatorButton">#1B6E1F</color>
     <color name="numberButton">#455A64</color>
     <color name="backButton">#F44336</color>
+    <color name="button">#9C27B0</color>
 </resources>
